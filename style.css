@@ -1,0 +1,392 @@
+/*Default*/
+* {
+	margin: 0;
+	padding: 0;
+
+	box-sizing: border-box;
+	/*패딩 때문에 기존 영역의 크기가 변화하는 것을 방지*/
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+/*디폴트로 넣어주면 좋다*/
+
+body {
+	overflow-x: hidden;
+	/*가로스크롤 발생 방지*/
+
+	font-family: sans-serif;
+	color: #585858;
+	/*body 안에 적용하면 내부의 모든 텍스트들에게 상속된다.*/
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	font-weight: 400;
+	/*폰트의 굵기, 백 단위로 100부터 900까지 올라간다.*/
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	vertical-align: middle;
+	/*이미지 하단의 공백 제거*/
+}
+
+span {
+	display: block;
+	/*원래는 inline*/
+}
+
+
+
+/*Header*/
+#header h1 {
+	background-color: yellow;
+	/*자식의 높이값에 영향을 받는다.*/
+}
+
+#header h1 .logo {
+	position: relative;
+	display: block;
+	/*a 태그는 inline 성격*/
+
+	width: 100%;
+	height: 65px;
+}
+
+#header h1 .logo img {
+	position: absolute;
+
+	top: 0;
+	margin-top: 23px;
+
+	left: 50%;
+	margin-left: -93px;
+}
+
+#header .buttons ul {
+	overflow: hidden;
+	/*자식이 float 속성을 가질 때 부모에게 높이값 영향을 줄 수 있는 코드
+	nav: 65px, header: 130px 을 확보하게 된다.*/
+}
+
+#header .buttons li {
+	position: relative;
+	float: left;
+	/*3차원적 특징 일부를 가지게 된다. width와 height의 영향을 부모(header,nav)에게 줄 수 없다.*/
+
+	width: 33.3333%;
+	/*소수점 뒷자리 개수 원하는 만큼*/
+	height: 65px;
+
+	font-size: 0;
+	/*/이미지 상단 공백 제거*/
+}
+
+#header .buttons li .menu-button {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+	/*클릭 범위를 li 태그를 꽉 채우게 설정*/
+	text-align: center; 
+	/*내부의 inline, inline-block(img) 요소에 적용되는 x축 중앙 정렬*/
+}
+
+#header .buttons li:nth-child(1) .menu-button {
+	background-color: blue;
+}
+
+#header .buttons li:nth-child(2) .menu-button {
+	background-color: skyblue;
+}
+
+#header .buttons li:nth-child(3) .menu-button {
+	background-color: lightblue;
+}
+
+#header .buttons li .menu-button img {
+	position: relative;
+
+	height: 20px;
+
+	/*y축 중앙 정렬 공식*/
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+
+
+/*1em=16px*/
+@media (min-width: 47em) {
+	#header {
+		position: fixed;
+		/*스크롤 시 고정*/
+		width: 100%;
+		height: 80px;
+
+		top: 0;
+		left: 0;
+
+		z-index: 999999;
+		/*최상단에 위치*/
+	}
+
+	#header h1 {
+		width: 50%;
+	}
+
+	#header h1 .logo {
+		width: 280px;
+		height: 80px;
+		/*클릭 가능 범위 재 설정*/
+	}
+
+	#header h1 .logo img {
+		margin-top: 30px;
+	}
+
+	#header	.buttons {
+		position: absolute;
+		width: 50%;
+		/*공간에 absolute를 사용할 때는 width 값을 명시해줘야한다.*/
+
+		/*좌우배치*/
+		left: 50%;
+		top: 0;
+	}
+
+	#header .buttons li {
+		height: 80px;
+		/*버튼의 높이 재설정*/
+	}
+
+}
+
+
+
+
+
+
+
+
+/*Main*/
+.main-content .product-group .product-group-link {
+	position: relative;
+	display: block;
+
+	width: 100%;
+	height: 56.25%;
+	/*공간에 대한 크기를 삽입되는 이미지의 크기와 근사한 비율로 설정*/
+
+	border: solid 10px white;
+
+	overflow: hidden;
+	/*스크롤 생성 방지*/
+}
+
+.main-content .product-group .product-group-link img {
+	width: 100%;
+	height: 100%;
+	/*부모 태그인 a 태그 내에서 꽉차게 설정*/
+}
+
+.main-content .product-group .product-group-link .link-text {
+	position: absolute;
+	/*뒤에 오는 형제 태그 img와 레이어 겹침*/
+
+	left: 25px;
+	bottom: 25px;
+
+	color: black;
+	font-size: 25px;
+}
+
+
+
+
+@media (min-width: 47em) {
+	.main-content {
+		padding-top: 80px;
+		/*header 태그가 3차원이기 때문에 레이어가 겹치는 현상 방지*/
+	}
+}
+
+@media (min-width: 60em) {
+	.main-content {
+		overflow: hidden;
+		/*자식 태그에 float 속성이 있기 때문에 영역이 잡히지 않는다.*/
+
+	}
+	.main-content .product-group .product-group-link {
+		float: left;
+		/*좌우배치*/
+
+		width: 50%;
+		height: 28.125%;
+		/*비율을 유지하면서 반값으로 설정*/
+	}
+} 
+
+
+
+
+
+
+
+
+
+/*Footer*/
+#footer {
+	position: relative;
+
+	/*background-color: pink;*/
+
+	padding-bottom: 66px;
+	/*to-top-button 자리*/
+	/*이거 때문에 footer의 height 66px 로 잡힘*/
+}
+
+#footer .left-nav {
+	padding-top: 20px;
+	text-align: center;
+}
+
+#footer .left-nav li {
+	padding: 5px 0;
+	/*상하 padding -> 글자 간의 공백*/
+}
+
+#footer .right-methods {
+	text-align: center;
+	margin-bottom: 20px;
+	margin-top: 30px;
+}
+
+#footer .right-methods li {
+	display: inline-block;
+	padding: 7px 4px;
+}
+
+#footer .right-methods li .payment-icon {
+	display: inline-block;
+
+	width: 30px;
+	height: 20px;
+}
+
+#footer .right-methods li .payment-icon.one {
+	background-color: black;
+}
+
+#footer .right-methods li .payment-icon.two {
+	background-color: red;
+}
+
+#footer .right-methods li .payment-icon.three {
+	background-color: yellow;
+}
+
+#footer .right-methods li .payment-icon.four {
+	background-color: blue;
+}
+
+#footer .right-methods li .payment-icon.five {
+	background-color: gray;
+}
+
+#footer .to-top-button {
+	position: absolute;
+	display: block;
+
+	width: 66px;
+	height: 66px;
+	background-color: green;
+
+	bottom: 0;
+	left: 50%;
+	margin-left: -33px;
+}
+
+
+
+@media (min-width: 60em) {
+	/*#footer {
+		height: 66px;
+	} 실제 연습할 땐 공간의 크기를 먼저 잡고 배치작업을 해야 한다.*/
+
+	#footer .left-nav {
+		float: left;
+
+		width: 50%;
+		/*background-color: pink;*/
+
+		text-align: left;
+
+		padding-top: 32px;
+		padding-left: 42px;
+	}
+
+	#footer .right-methods {
+		float: right;
+
+		width: 50%;
+		/*background-color: skyblue;*/
+
+		margin: 0;
+		padding-top: 32px;
+		padding-right: 40px;
+
+		text-align: right;
+	}
+
+	#footer ul, #footer li, #footer h3 {
+		display: inline-block;
+		vertical-align: middle;
+		/*x축 한 줄로 정렬*/
+	}
+
+	#footer .left-nav a {
+		font-size: 14px;
+		padding: 0 5px;
+	}
+
+	#footer .right-methods li {
+		padding: 0 4px;
+	}
+
+	#footer h3 {
+		padding-right: 10px;
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
